@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import rikkei.academy.Calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CalculatorTest {
@@ -13,10 +14,11 @@ public class CalculatorTest {
     public static final char MULTIPLICATION = '*';
     public static final char DIVISION = '/';
     public final char ADDITION = '+';
+    public final char WRONG = '=';
 
     @Test
     @DisplayName("Testing addition")
-    void testCalculatorAdd() {
+     void testCalculatorAdd() {
         int firstOperand = 1;
         int secondOperand = 1;
         char operator = ADDITION;
@@ -56,5 +58,21 @@ public class CalculatorTest {
         int expected = 2;
         int result = Calculator.calculate(firstOperand, secondOperand, operator);
         assertEquals(expected, result);
+    }
+    @Test
+    @DisplayName("Testing operator by zero")
+    void testCalculateOperatorByZero() {
+        int firstOperand = 4;
+        int secondOperand = 0;
+        char operator = '/';
+        assertThrows(RuntimeException.class,()->{Calculator.calculate(firstOperand,secondOperand,operator);});
+    }
+    @Test
+    @DisplayName("Testing wrong operator")
+    void testCalculateWrongOperator() {
+        int firstOperand = 4;
+        int secondOperand = 2;
+        char operator = WRONG;
+        assertThrows(RuntimeException.class,()->{Calculator.calculate(firstOperand,secondOperand,operator);});
     }
 }

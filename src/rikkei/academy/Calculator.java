@@ -17,6 +17,7 @@ public class Calculator {
             case DIVISION:
                 if (secondOperand != 0) {
                     return firstOperand / secondOperand;
+
                 } else {
                     throw new RuntimeException("Can't divide by 0");
                 }
